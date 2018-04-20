@@ -1,0 +1,51 @@
+<p>
+  home works!
+</p>
+<div class="card">
+  <div class="card-block">
+    <h4>{{artist?.artistName}} <span class="tag tag-default"></span></h4>
+    <hr />
+    <footer>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link"
+             [routerLinkActive]="['active']"
+             [routerLink]="['./tracks']">Tracks
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             [routerLinkActive]="['active']"
+             [routerLink]="['./albums']">Albums
+          </a>
+        </li>
+      </ul>
+    </footer>
+  </div>
+</div>
+
+<div class="m-t-1">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="container">
+	<div class="row">
+		                                <div class="col-md-6">
+                                    <!-- Nav tabs --><div class="card">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                                        <li role="presentation"><a [routerLinkActive]="['active']"
+                                          [routerLink]="['./tracks']" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                                        <li role="presentation"><a [routerLinkActive]="['active']"
+                                          [routerLink]="['./albums']" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                      <router-outlet></router-outlet>
+                                    </div>
+</div>
+                                </div>
+	</div>
+</div>
