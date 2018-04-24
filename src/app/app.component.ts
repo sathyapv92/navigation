@@ -1,45 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Customer } from './interface';
+import { SharedserviceService } from './sharedservice.service';
+import { OnChanges, DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  public myForm: FormGroup;
-
-  constructor(private _fb: FormBuilder) { }
-
-  ngOnInit() {
-      this.myForm = this._fb.group({
-          name: ['', [Validators.required, Validators.minLength(5)]],
-          addresses: this._fb.array([
-              this.initAddress(),
-          ])
-      });
-  }
-
-  initAddress() {
-      return this._fb.group({
-          street: ['', Validators.required],
-          postcode: ['']
-      });
-  }
-
-  addAddress() {
-      const control = <FormArray>this.myForm.controls['addresses'];
-      control.push(this.initAddress());
-  }
-
-  removeAddress(i: number) {
-      const control = <FormArray>this.myForm.controls['addresses'];
-      control.removeAt(i);
-  }
-
-  save(model: Customer) {
-      // call API to save
-      // ...
-      console.log(model);
-  }
+export class AppComponent implements OnChanges,DoCheck {
+    ngDoCheck(): void {
+        // this.missionService.missionConfirmed$.subscribe(
+        //     astronaut => {
+        //       this._fb = astronaut ;
+        //       console.log( JSON.stringify(this._fb) +"   this._fb")
+        //     });
+        this._fb = this.missionService.missionAnnouncedSource1;
+        console.log( JSON.stringify(this._fb) +"   this._fb")
+        this.fb = this.missionService.missionConfirmedSource1;
+        console.log( JSON.stringify(this.fb) +"   this.fb")
+        // this.missionService.missionAnnounced$.subscribe(
+        //       astronaut => {
+        //           this.fb = astronaut ;
+        //           console.log(   JSON.stringify(this.fb)+"   this.fb")
+        //         }
+        //     );
+    }
+    ngOnChanges(changes: SimpleChanges): void {
+        this.missionService.missionConfirmed$.subscribe(
+            astronaut => {
+              this._fb = astronaut ;
+              console.log(   this._fb+"   this._fb")
+            });
+  
+        this.missionService.missionAnnounced$.subscribe(
+              astronaut => {
+                  this.fb = astronaut ;
+                  console.log(   this.fb+"   this.fb")
+                }
+            );
+    }
+    constructor(private missionService: SharedserviceService,private _fb: FormBuilder,private fb: FormBuilder) {
+       
+      }
+      
 }

@@ -1,3 +1,25 @@
 <p>
   child2 works!
 </p>
+<input type="text" #test  value="sssssssssss" >
+
+<form [formGroup]="myForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" id="quantity" formControlName="quantity">
+  </div>
+
+  <div class="form-group">
+    <input type="submit" class="form-control" [disabled]="myForm?.invalid" value="Submit"/>
+  </div>
+  <input class="form-control" formControlName="ate"
+  value="this.myForm.controls[ate].value | date:'dd/MM/yyyy'">
+  
+</form>
+
+<h6>FormGroup Model (<code>myForm.value</code>)</h6>
+<div><pre><code>{{ myForm?.value | json }}</code></pre></div>
