@@ -10,6 +10,8 @@ import {RouterModule} from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MissionComponent } from './mission/mission.component';
 import { SharedserviceService } from './sharedservice.service';
+import { TestComponent } from './test/test.component';
+import { Test1Component } from './test1/test1.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SharedserviceService } from './sharedservice.service';
     HomeComponent,
     Child1Component,
     Child2Component,
-    MissionComponent
+    MissionComponent,
+    TestComponent,
+    Test1Component
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,13 @@ import { SharedserviceService } from './sharedservice.service';
           {path: 'albums', component: Child2Component}
         ]
       },
+        {
+          path:"test",
+          component:TestComponent,
+      },{
+        path:"test1",
+        component:TestComponent,
+      }
      
      ])
   ],
